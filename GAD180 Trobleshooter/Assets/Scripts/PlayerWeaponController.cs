@@ -105,23 +105,27 @@ public class PlayerWeaponController : MonoBehaviour
         int i = 0;
         foreach (GameObject weapon in weapons)
         {
-            if (weapon.GetComponent<Animator>())
-            {
-                weapon.GetComponent<Animator>().Rebind();
-            }
-
             //Enable / Disable weapon
             if (i == selectedWeapon)
             {
                 weapon.SetActive(true);
 
-                if (weapon.GetComponent<Weapon>())
+                if (weapon.GetComponent<Weapon>() && weapon.GetComponent<Weapon>().projectile)
                 {
                     weapon.GetComponent<Weapon>().UpdateAmmoCounter();
                 }
                 else
                 {
                     ammoCounter.text = "";
+                }
+
+                if (weapon.GetComponent<Animator>())
+                {
+                    weapon.GetComponent<Animator>().Rebind();
+
+                    weapon.GetComponent<Animator>().enabled = true;
+
+                    weapon.GetComponent<Animator>().SetBool("playerControlled", true);
                 }
             }
             else
@@ -196,11 +200,6 @@ public class PlayerWeaponController : MonoBehaviour
 
             weapons.Remove(weapon);
             weapon.transform.parent = null;
-
-            if (weapon.GetComponent<Weapon>().arms)
-            {
-                weapon.GetComponent<Weapon>().arms.SetActive(false);
-            }
         }
         else if (weapon.tag == "Hands" && numberOfWeapons < maxNumberOfWeapons)
         {
@@ -248,11 +247,6 @@ public class PlayerWeaponController : MonoBehaviour
 
             weapons.Remove(weapon);
             weapon.transform.parent = null;
-
-            if (weapon.GetComponent<Weapon>().arms)
-            {
-                weapon.GetComponent<Weapon>().arms.SetActive(false);
-            }
         }
 
         if (hasHands)

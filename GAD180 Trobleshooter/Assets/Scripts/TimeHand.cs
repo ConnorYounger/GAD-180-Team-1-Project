@@ -33,6 +33,8 @@ public class TimeHand : MonoBehaviour
     public string meleeAnimation;
 
     private bool canMeleeAttack = true;
+    private bool speedUpOrb;
+    private bool slowDownOrb;
 
     private RaycastHit hit;
 
@@ -81,30 +83,71 @@ public class TimeHand : MonoBehaviour
     {
         if (selectedOrb == 0 || selectedOrb == 1) 
         {
-            Physics.SphereCast(playerCam.transform.position, 1, playerCam.transform.forward, out hit, maxOrbRange);
+            Physics.SphereCast(playerCam.transform.position, 1, playerCam.transform.forward, out hit, maxOrbRange, ~11);
             Debug.DrawLine(playerCam.transform.position, hit.point, Color.green);
 
             if (hit.collider != null)
             {
-                if (hit.collider.GetComponentInParent<TimeInterractableAnimation>() && !hit.collider.GetComponentInParent<TimeInterractableAnimation>().timeOrbHit)
+                if(selectedOrb == 0 && speedOrbHitObject && speedOrbHitObject != hit.collider.gameObject)
                 {
-                    SetOrb(hit.collider.gameObject);
+                    ResetOrb(speedOrbHitObject);
                 }
-                else if(hit.collider.GetComponentInParent<MovingPlatform>() && !hit.collider.GetComponentInParent<MovingPlatform>().timeOrbHit)
+                else if (selectedOrb == 1 && slowOrbHitObject && slowOrbHitObject != hit.collider.gameObject)
                 {
-                    SetOrb(hit.collider.gameObject);
-                }
-                else if (hit.collider.GetComponent<LaunchPlatform>() && !hit.collider.GetComponent<LaunchPlatform>().timeOrbHit)
-                {
-                    SetOrb(hit.collider.gameObject);
-                }
-                else if (hit.collider.GetComponent<RobotAI>() && !hit.collider.GetComponent<RobotAI>().timeOrbHit)
-                {
-                    SetOrb(hit.collider.gameObject);
+                    ResetOrb(slowOrbHitObject);
                 }
 
-                CreateOrb();
+                if (hit.collider.GetComponentInParent<TimeInterractableAnimation>())
+                {
+                    if (!hit.collider.GetComponentInParent<TimeInterractableAnimation>().timeOrbHit)
+                    {
+                        SetOrb(hit.collider.gameObject);
+                    }
+                    else if(hit.collider.GetComponentInParent<TimeInterractableAnimation>().timeOrbHit && hit.collider.GetComponentInParent<TimeInterractableAnimation>().selectedOrb != selectedOrb)
+                    {
+                        SetOrb(hit.collider.gameObject);
+                    }
+                }
 
+                if (hit.collider.GetComponentInParent<MovingPlatform>())
+                {
+                    if (!hit.collider.GetComponentInParent<MovingPlatform>().timeOrbHit)
+                    {
+                        SetOrb(hit.collider.gameObject);
+                    }
+                    else if (hit.collider.GetComponentInParent<MovingPlatform>().timeOrbHit && hit.collider.GetComponentInParent<MovingPlatform>().selectedOrb != selectedOrb)
+                    {
+                        SetOrb(hit.collider.gameObject);
+                    }
+                }
+
+                if (hit.collider.GetComponentInParent<LaunchPlatform>())
+                {
+                    if (!hit.collider.GetComponentInParent<LaunchPlatform>().timeOrbHit)
+                    {
+                        SetOrb(hit.collider.gameObject);
+                    }
+                    else if (hit.collider.GetComponentInParent<LaunchPlatform>().timeOrbHit && hit.collider.GetComponentInParent<LaunchPlatform>().selectedOrb != selectedOrb)
+                    {
+                        SetOrb(hit.collider.gameObject);
+                    }
+                }
+
+                if (hit.collider.GetComponentInParent<RobotAI>())
+                {
+                    if (!hit.collider.GetComponentInParent<RobotAI>().timeOrbHit)
+                    {
+                        SetOrb(hit.collider.gameObject);
+                    }
+                    else if (hit.collider.GetComponentInParent<RobotAI>().timeOrbHit && hit.collider.GetComponentInParent<RobotAI>().selectedOrb != selectedOrb)
+                    {
+                        SetOrb(hit.collider.gameObject);
+                    }
+                }
+
+                //CreateOrb();
+
+                /*
                 if (hit.collider.GetComponentInParent<TimeInterractableAnimation>() || hit.collider.GetComponentInParent<MovingPlatform>() || hit.collider.GetComponent<LaunchPlatform>() || hit.collider.GetComponent<RobotAI>())
                 {
                     if (selectedOrb == 0)
@@ -148,6 +191,7 @@ public class TimeHand : MonoBehaviour
                         }
                     }
                 }
+                */
             }
         }
     }
@@ -156,6 +200,27 @@ public class TimeHand : MonoBehaviour
     {
         if (setObject)
         {
+            if(selectedOrb == 0 && slowOrbHitObject != setObject)
+            {
+                speedOrbHitObject = setObject;
+            }
+            else if(selectedOrb == 0 && slowOrbHitObject == setObject)
+            {
+                speedOrbHitObject = setObject;
+                slowOrbHitObject = null;
+            }
+
+
+            if (selectedOrb == 1 && speedOrbHitObject != setObject)
+            {
+                slowOrbHitObject = setObject;
+            }
+            else if (selectedOrb == 1 && speedOrbHitObject == setObject)
+            {
+                slowOrbHitObject = setObject;
+                speedOrbHitObject = null;
+            }
+
             if (setObject.GetComponentInParent<TimeInterractableAnimation>())
             {
                 hit.collider.GetComponentInParent<TimeInterractableAnimation>().OrbHit(selectedOrb, timeMultiplier);

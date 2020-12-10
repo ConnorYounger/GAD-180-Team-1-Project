@@ -10,6 +10,8 @@ public class LaunchPlatform : MonoBehaviour
     public float coolDown = 1;
     private float currentLaunchForce;
 
+    public int selectedOrb;
+
     private bool canLaunch = true;
     public bool timeOrbHit;
 
@@ -56,7 +58,9 @@ public class LaunchPlatform : MonoBehaviour
 
     public void ChangeLaunchForce(int orbType)
     {
-        if(orbType == 0)
+        selectedOrb = orbType;
+
+        if (orbType == 0)
         {
             currentLaunchForce = speedUpLaunchForce;
         }

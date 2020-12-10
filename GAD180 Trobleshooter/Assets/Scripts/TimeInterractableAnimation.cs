@@ -6,6 +6,8 @@ public class TimeInterractableAnimation : MonoBehaviour
 {
     public bool timeOrbHit;
 
+    public int selectedOrb;
+
     private Animator animator;
 
     void Start()
@@ -13,15 +15,17 @@ public class TimeInterractableAnimation : MonoBehaviour
         animator = gameObject.GetComponent<Animator>();
     }
 
-    public void OrbHit(int selectedOrb, float multiplier)
+    public void OrbHit(int selOrb, float multiplier)
     {
-        if(selectedOrb == 0)
+        selectedOrb = selOrb;
+
+        if (selOrb == 0)
         {
             animator.speed = 1 * multiplier;
 
             Debug.Log("Orb Hit animation * " + multiplier);
         }
-        else if(selectedOrb == 1)
+        else if(selOrb == 1)
         {
             animator.speed = 1 / multiplier;
 

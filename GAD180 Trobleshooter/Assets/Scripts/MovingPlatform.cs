@@ -11,6 +11,8 @@ public class MovingPlatform : MonoBehaviour
     public float zSpeed = 0;
     public float distance = 10;
 
+    public int selectedOrb;
+
     private float currentDistance;
     private float timer;
 
@@ -51,15 +53,17 @@ public class MovingPlatform : MonoBehaviour
         }
     }
 
-    public void OrbHit(int selectedOrb, float multiplier)
+    public void OrbHit(int selOrb, float multiplier)
     {
-        if (selectedOrb == 0)
+        selectedOrb = selOrb;
+
+        if (selOrb == 0)
         {
             time = 1 * multiplier;
 
             Debug.Log("Orb Hit animation * " + multiplier);
         }
-        else if (selectedOrb == 1)
+        else if (selOrb == 1)
         {
             time = 1 / multiplier;
 

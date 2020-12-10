@@ -9,12 +9,22 @@ public class VentOpening : MonoBehaviour
     public bool breakIntoPieces;
     public GameObject ventPieces;
 
+    private AudioSource audioSource;
+
     public bool addForce;
     private float force = 0.0001f;
 
+    private void Start()
+    {
+        if (gameObject.GetComponent<AudioSource>())
+        {
+            audioSource = gameObject.GetComponent<AudioSource>();
+        }
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.collider.GetComponent<Rigidbody>() && collision.collider.GetComponent<Rigidbody>().velocity.magnitude > 3)
+        if(collision.collider.GetComponent<Rigidbody>() && collision.collider.GetComponent<Rigidbody>().velocity.magnitude > 3 && !isOpened)
         {
             Open(collision.collider.gameObject);
         }
@@ -32,6 +42,8 @@ public class VentOpening : MonoBehaviour
         }
         else
         {
+            isOpened = true;
+
             GameObject pieces = Instantiate(ventPieces, transform.position, transform.rotation);
 
             if (addForce)
@@ -42,7 +54,12 @@ public class VentOpening : MonoBehaviour
                 }
             }
 
-            gameObject.SetActive(false);
+            //gameObject.SetActive(false);
+
+            gameObject.GetComponent<BoxCollider>().enabled = false;
+            gameObject.GetComponent<MeshRenderer>().enabled = false;
+
+            audioSource.Play();
         }
     }
 }

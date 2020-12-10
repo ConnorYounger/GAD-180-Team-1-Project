@@ -115,6 +115,23 @@ public class Weapon : MonoBehaviour
             {
                 Reload();
             }
+
+
+            if (animator)
+            {
+                if ((Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)) && !isWalking)
+                {
+                    isWalking = true;
+
+                    animator.SetBool("isWalking", true);
+                }
+                else if (!(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)) && isWalking)
+                {
+                    isWalking = false;
+
+                    animator.SetBool("isWalking", false);
+                }
+            }
         }
 
         if(!weaponMode && !meleeAttack && rb.velocity.magnitude > 15)
@@ -126,19 +143,6 @@ public class Weapon : MonoBehaviour
             meleeAttack = false;
 
             weaponThrown = false;
-        }
-
-        if((Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)) && !isWalking)
-        {
-            isWalking = true;
-
-            animator.SetBool("isWalking", true);
-        }
-        else if (!(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)) && isWalking)
-        {
-            isWalking = false;
-
-            animator.SetBool("isWalking", false);
         }
     }
 
@@ -191,7 +195,9 @@ public class Weapon : MonoBehaviour
 
         if (animator && !meleeAttack)
         {
-            animator.SetBool("shoot", true);
+            animator.Play(attackAnimation);
+
+            //animator.SetBool("shoot", true);
         }
 
         ammoInClip -= ammoCost;
@@ -335,18 +341,26 @@ public class Weapon : MonoBehaviour
 
     public void WeaponMode()
     {
-        if (animator)
-        {
-            animator.enabled = true;
-
-            animator.SetBool("playerControlled", true);
-        }
-
         gameObject.GetComponent<Rigidbody>().isKinematic = true;
         gameObject.GetComponent<Rigidbody>().useGravity = false;
         gameObject.GetComponent<BoxCollider>().enabled = false;
 
         weaponMode = true;
+
+        if (!enemyControlled)
+        {
+            if (animator)
+            {
+                animator.enabled = true;
+
+                animator.SetBool("playerControlled", true);
+            }
+
+            if (arms != null)
+            {
+                arms.SetActive(true);
+            }
+        }
     }
 
     public void Drop(Vector3 direction, float force)
@@ -401,7 +415,12 @@ public class Weapon : MonoBehaviour
         gameObject.GetComponent<Rigidbody>().isKinematic = false;
         gameObject.GetComponent<Rigidbody>().useGravity = true;
         gameObject.GetComponent<BoxCollider>().enabled = true;
-        gameObject.GetComponent<BoxCollider>().isTrigger = false;        
+        gameObject.GetComponent<BoxCollider>().isTrigger = false;
+
+        if (arms)
+        {
+            arms.SetActive(false);
+        }
 
         weaponMode = false;
         meleeAttack = false;

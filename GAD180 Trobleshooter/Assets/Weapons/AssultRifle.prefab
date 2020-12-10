@@ -129,6 +129,7 @@ MonoBehaviour:
   weaponMode: 0
   enemyControlled: 0
   weaponThrown: 0
+  isReloading: 0
   mouseHold: 1
   bulletsPerShot: 1
   weaponType: 1
@@ -153,8 +154,9 @@ MonoBehaviour:
     type: 3}
   shootPoint: {fileID: 0}
   muzzleFlashPoint: {fileID: 8762943750110453288}
+  arms: {fileID: 0}
   ammoCounter: {fileID: 0}
-  shootSound: {fileID: 8300000, guid: af77edc3f269c044c9f2ca249036b902, type: 3}
+  shootSound: {fileID: 8300000, guid: dad7b459f8a54f041a4b4ffca9b8fb8c, type: 3}
   reloadSound: {fileID: 8300000, guid: 5e4d61c81b81b7045aae939e5490b709, type: 3}
 --- !u!82 &-7795072159609342518
 AudioSource:

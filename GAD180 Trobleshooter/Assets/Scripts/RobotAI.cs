@@ -26,6 +26,7 @@ public class RobotAI : MonoBehaviour
     public float meleeAttackTime = 0.5f;
     public float dropWeaponTime = 1;
     public float repairTime = 5;
+    public float selectedOrb;
     private float attackTimer;
     private float behaviour = 1;
     private float timeMultiplier = 1;
@@ -139,7 +140,7 @@ public class RobotAI : MonoBehaviour
             {
                 RaycastHit hit;
 
-                if (Physics.SphereCast(weapon.GetComponent<Weapon>().shootPoint.transform.position, 0.1f, weapon.GetComponent<Weapon>().shootPoint.transform.forward, out hit, 1000))
+                if (Physics.SphereCast(weapon.GetComponent<Weapon>().shootPoint.transform.position, 0.1f, weapon.GetComponent<Weapon>().shootPoint.transform.forward, out hit, 1000, ~15))
                 {
                     Debug.DrawLine(weapon.GetComponent<Weapon>().shootPoint.transform.position, hit.point, Color.red);
 
@@ -718,6 +719,8 @@ public class RobotAI : MonoBehaviour
 
     public void TimeOrbHit(int type, float multiplier, GameObject hands)
     {
+        selectedOrb = type;
+
         if(type == 0)
         {
             navMesh.speed = navMesh.speed * multiplier;

@@ -19,6 +19,23 @@ public class Projectile : MonoBehaviour
         {
             transform.Translate(Vector3.forward * bulletSpeed * time * Time.deltaTime);
         }
+
+        RaycastHit hit;
+
+        if (Physics.SphereCast(transform.position, 0.1f,transform.forward, out hit, 0.5f))
+        {
+            Debug.DrawLine(transform.position, hit.point, Color.red);
+
+            if (hit.collider.GetComponent<RobotAI>())
+            {
+                hit.collider.GetComponent<RobotCollisionBox>().robotParent.GetComponent<RobotAI>().TakeDamage(bulletDamage);
+                hit.collider.GetComponent<RobotCollisionBox>().BreakOff();
+
+                Debug.Log("Hit Robot 2");
+
+                ProjectileHit(hit.collider.gameObject);
+            }
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
