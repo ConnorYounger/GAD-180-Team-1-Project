@@ -184,7 +184,7 @@ public class PlayerMovement : MonoBehaviour {
         rb.AddForce(orientation.transform.right * x * moveSpeed * Time.deltaTime * multiplier);
     }
 
-    private void Jump() {
+    public void Jump() {
         if (grounded && readyToJump) {
             readyToJump = false;
 

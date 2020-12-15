@@ -18,6 +18,7 @@ public class Weapon : MonoBehaviour
     public int weaponType = 0; //(For Enemy AI) Type 0 = Pistol    Type 1 = AssultRifle/Burst
     public int weaponID = 0;
     public float spread = 0;
+    public float playerSpread = 0;
     private List<Quaternion> bullets;
 
     public int clipSize = 10;
@@ -54,6 +55,7 @@ public class Weapon : MonoBehaviour
 
     public AudioClip shootSound;
     public AudioClip reloadSound;
+    public AudioClip noAmmoSound;
 
     private AudioSource audioSource;
 
@@ -72,10 +74,16 @@ public class Weapon : MonoBehaviour
         {
             audioSource = gameObject.GetComponent<AudioSource>();
         }
+
+        if (arms)
+        {
+            arms.SetActive(false);
+        }
     }
 
     void Start()
     {
+
         if (startingAmmo >= clipSize)
         {
             ammoInClip = clipSize;
@@ -102,11 +110,11 @@ public class Weapon : MonoBehaviour
     {
         if (weaponMode && !enemyControlled && !isReloading)
         {
-            if (!mouseHold && Input.GetMouseButtonDown(0) && ammoInClip > 0 && canShoot)
+            if (!mouseHold && Input.GetMouseButtonDown(0) && canShoot)
             {
                 FireWeapon();
             }
-            else if (mouseHold && Input.GetMouseButton(0) && ammoInClip > 0 && canShoot)
+            else if (mouseHold && Input.GetMouseButton(0) && canShoot)
             {
                 FireWeapon();
             }
@@ -148,78 +156,96 @@ public class Weapon : MonoBehaviour
 
     public void FireWeapon()
     {
-        canShoot = false;
+        if (ammoInClip > 0) {
+            canShoot = false;
 
-        for (int i = 0; i < bulletsPerShot; i++)
-        {
-            bullets[i] = Random.rotation;
-            if (projectile) 
+            for (int i = 0; i < bulletsPerShot; i++)
             {
-                GameObject bullet = Instantiate(projectile, shootPoint.transform.position, shootPoint.transform.rotation);
-                //bullet.GetComponent<Rigidbody>().AddForce(shootPoint.transform.forward * fireForce);
-                if (!enemyControlled)
+                bullets[i] = Random.rotation;
+                if (projectile)
                 {
-                    bullet.GetComponent<Projectile>().bulletSpeed = fireForce * playerFireForceMultiplier;
+                    GameObject bullet = Instantiate(projectile, shootPoint.transform.position, shootPoint.transform.rotation);
+                    //bullet.GetComponent<Rigidbody>().AddForce(shootPoint.transform.forward * fireForce);
+                    if (!enemyControlled)
+                    {
+                        bullet.GetComponent<Projectile>().bulletSpeed = fireForce * playerFireForceMultiplier;
+                    }
+                    else
+                    {
+                        bullet.GetComponent<Projectile>().bulletSpeed = fireForce;
+                    }
+
+                    if (enemyControlled)
+                    {
+                        bullet.transform.rotation = Quaternion.RotateTowards(shootPoint.transform.rotation, bullets[i], spread);
+                    }
+                    else
+                    {
+                        bullet.transform.rotation = Quaternion.RotateTowards(shootPoint.transform.rotation, bullets[i], playerSpread);
+                    }
+
+                    if (enemyControlled)
+                    {
+                        bullet.layer = 17;
+                    }
+
+                    Destroy(bullet, bulletDestroyTime);
                 }
                 else
                 {
-                    bullet.GetComponent<Projectile>().bulletSpeed = fireForce;
+                    Debug.Log("Melee Attack");
+
+                    meleeAttack = true;
+
+                    gameObject.GetComponent<BoxCollider>().isTrigger = true;
+                    gameObject.GetComponent<BoxCollider>().enabled = true;
+
+                    if (animator && !enemyControlled)
+                    {
+                        animator.Play(attackAnimation);
+                    }
+
+                    Invoke("MeleeReset", meleeTime);
                 }
+            }
 
-                bullet.transform.rotation = Quaternion.RotateTowards(shootPoint.transform.rotation, bullets[i], spread);
+            if (animator && !meleeAttack && !enemyControlled)
+            {
+                animator.Play(attackAnimation);
 
-                if (enemyControlled)
-                {
-                    bullet.layer = 17;
-                }
+                //animator.SetBool("shoot", true);
+            }
 
-                Destroy(bullet, bulletDestroyTime);
+            ammoInClip -= ammoCost;
+            if (ammoInClip <= 0 && ammoOutClip > 0)
+            {
+                Reload();
             }
             else
             {
-                Debug.Log("Melee Attack");
-
-                meleeAttack = true;
-
-                gameObject.GetComponent<BoxCollider>().isTrigger = true;
-                gameObject.GetComponent<BoxCollider>().enabled = true;
-
-                if (animator)
-                {
-                    animator.Play(attackAnimation);
-                }
-
-                Invoke("MeleeReset", meleeTime);
+                Invoke("FireRateReset", fireRate);
             }
-        }
 
-        if (animator && !meleeAttack)
-        {
-            animator.Play(attackAnimation);
+            if (!enemyControlled)
+            {
+                UpdateAmmoCounter();
+            }
 
-            //animator.SetBool("shoot", true);
-        }
+            if (shootSound && audioSource)
+            {
+                audioSource.clip = shootSound;
 
-        ammoInClip -= ammoCost;
-        if(ammoInClip <= 0 && ammoOutClip > 0)
-        {
-            Reload();
+                audioSource.Play();
+            }
         }
         else
         {
-            Invoke("FireRateReset", fireRate);
-        }
-
-        if (!enemyControlled)
-        {
-            UpdateAmmoCounter();
-        }
-
-        if (shootSound && audioSource)
-        {
-            audioSource.clip = shootSound;
-
-            audioSource.Play();
+            if (audioSource)
+            {
+                audioSource.clip = noAmmoSound;
+                audioSource.time = 4.5f;
+                audioSource.Play();
+            }
         }
     }
 
@@ -229,7 +255,14 @@ public class Weapon : MonoBehaviour
         {
             if (other.GetComponent<RobotCollisionBox>())
             {
-                other.GetComponent<RobotCollisionBox>().robotParent.GetComponent<RobotAI>().TakeDamage(meleeDamage);
+                if (other.GetComponent<RobotCollisionBox>().robotParent.GetComponent<RobotAI>())
+                {
+                    other.GetComponent<RobotCollisionBox>().robotParent.GetComponent<RobotAI>().TakeDamage(meleeDamage);
+                }
+                else if (other.GetComponent<RobotCollisionBox>().robotParent.GetComponent<UnfinishedRobot>())
+                {
+                    other.GetComponent<RobotCollisionBox>().robotParent.GetComponent<UnfinishedRobot>().TakeDamage(meleeDamage);
+                }
                 other.GetComponent<RobotCollisionBox>().BreakOff();
 
                 currentEnemiesPerMelleAttack++;

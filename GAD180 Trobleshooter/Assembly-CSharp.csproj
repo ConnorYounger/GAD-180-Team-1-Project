@@ -190,6 +190,7 @@
     <Compile Include="Assets\Scripts\LevelManager.cs" />
     <Compile Include="Assets\Scripts\MoveCamera.cs" />
     <Compile Include="Assets\Scripts\MovingPlatform.cs" />
+    <Compile Include="Assets\Scripts\PlayAnimation.cs" />
     <Compile Include="Assets\Scripts\PlayerHealth.cs" />
     <Compile Include="Assets\Scripts\PlayerMeleeCollision.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
@@ -209,6 +210,8 @@
     <Compile Include="Assets\Scripts\TimeHand.cs" />
     <Compile Include="Assets\Scripts\TimeInterractableAnimation.cs" />
     <Compile Include="Assets\Scripts\TimeOrbProjectile.cs" />
+    <Compile Include="Assets\Scripts\UnfinishedRobot.cs" />
+    <Compile Include="Assets\Scripts\UnfinishedRobotConveyor.cs" />
     <Compile Include="Assets\Scripts\VentOpening.cs" />
     <Compile Include="Assets\Scripts\Weapon.cs" />
     <None Include="Assets\AssetStore\Standard Assets\Prototyping\Shaders\WorldCoordDiffuse.shader" />

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class SpawnEnemies : MonoBehaviour
 {
@@ -15,9 +16,14 @@ public class SpawnEnemies : MonoBehaviour
     private List<GameObject> spawnedRobots;
 
     public bool spawnTriggered;
+    public bool cleanUp;
     private bool hasSpawned;
 
+    public GameObject[] animations;
+
     private GameObject[] openDoor;
+
+    private List<GameObject> robots;
 
     private void Start()
     {
@@ -34,6 +40,20 @@ public class SpawnEnemies : MonoBehaviour
 
     public void Spawn()
     {
+        if (cleanUp)
+        {
+            robots = new List<GameObject>();
+            robots = GameObject.FindGameObjectsWithTag("Enemy").ToList();
+
+            foreach (GameObject robot in robots)
+            {
+                if (robot.GetComponent<RobotAI>() && !robot.GetComponent<RobotAI>().isAlive)
+                {
+                    Destroy(robot);
+                }
+            }
+        }
+
         spawnedRobots = new List<GameObject>();
 
         if (enemies.Length > 1)
@@ -113,6 +133,14 @@ public class SpawnEnemies : MonoBehaviour
         foreach (GameObject door in openDoor)
         {
             door.GetComponent<DoorScript>().searchForRobts = true;
+        }
+
+        foreach(GameObject animate in animations)
+        {
+            if (animate.GetComponent<PlayAnimation>())
+            {
+                animate.GetComponent<PlayAnimation>().Play();
+            }
         }
 
         CheckForReviveRobot();

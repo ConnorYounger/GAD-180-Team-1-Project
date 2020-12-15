@@ -13,23 +13,41 @@ public class PlayerStickToPlatform : MonoBehaviour
         player = GameObject.Find("Player");
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if(collision.gameObject == player && canStick)
+        
+        if (other.gameObject == player && canStick)
         {
             player.transform.parent = transform;
 
             player.GetComponent<PlayerPlatformMovement>().control = true;
         }
+        
+
+        /*
+        if (other.GetComponent<Rigidbody>())
+        {
+            other.transform.parent = transform;
+        }
+        */
     }
 
-    private void OnCollisionExit(Collision collision)
+    private void OnTriggerExit(Collider other)
     {
-        if(collision.gameObject == player && player.transform.parent == transform)
+        
+        if (other.gameObject == player && player.transform.parent == transform)
         {
             player.transform.parent = null;
 
             player.GetComponent<PlayerPlatformMovement>().control = false;
         }
+        
+
+        /*
+        if(other.GetComponent<Rigidbody>() && other.transform.parent == transform)
+        {
+            other.transform.parent = null;
+        }
+        */
     }
 }

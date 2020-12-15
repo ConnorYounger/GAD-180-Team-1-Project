@@ -28,7 +28,14 @@ public class Projectile : MonoBehaviour
 
             if (hit.collider.GetComponent<RobotAI>())
             {
-                hit.collider.GetComponent<RobotCollisionBox>().robotParent.GetComponent<RobotAI>().TakeDamage(bulletDamage);
+                if (hit.collider.GetComponent<RobotCollisionBox>().robotParent.GetComponent<RobotAI>())
+                {
+                    hit.collider.GetComponent<RobotCollisionBox>().robotParent.GetComponent<RobotAI>().TakeDamage(bulletDamage);
+                }
+                else if (hit.collider.GetComponent<RobotCollisionBox>().robotParent.GetComponent<UnfinishedRobot>())
+                {
+                    hit.collider.GetComponent<RobotCollisionBox>().robotParent.GetComponent<UnfinishedRobot>().TakeDamage(bulletDamage);
+                }
                 hit.collider.GetComponent<RobotCollisionBox>().BreakOff();
 
                 Debug.Log("Hit Robot 2");
@@ -49,6 +56,22 @@ public class Projectile : MonoBehaviour
                 collision.collider.GetComponent<VentOpening>().Open(gameObject);
 
                 ProjectileHit(collision.gameObject);
+            }
+            else if (collision.collider.GetComponent<RobotCollisionBox>() && pierceCount > 0)
+            {
+                if (collision.collider.GetComponent<RobotCollisionBox>().robotParent.GetComponent<RobotAI>())
+                {
+                    collision.collider.GetComponent<RobotCollisionBox>().robotParent.GetComponent<RobotAI>().TakeDamage(bulletDamage);
+                }
+                else if (collision.collider.GetComponent<RobotCollisionBox>().robotParent.GetComponent<UnfinishedRobot>())
+                {
+                    collision.collider.GetComponent<RobotCollisionBox>().robotParent.GetComponent<UnfinishedRobot>().TakeDamage(bulletDamage);
+                }
+                collision.collider.GetComponent<RobotCollisionBox>().BreakOff();
+
+                Debug.Log("Hit Robot 2");
+
+                ProjectileHit(collision.collider.gameObject);
             }
             else if (collision.collider.GetComponent<PlayerHealth>())
             {
@@ -73,7 +96,14 @@ public class Projectile : MonoBehaviour
         {
             if (other.GetComponent<RobotCollisionBox>() && pierceCount > 0)
             {
-                other.GetComponent<RobotCollisionBox>().robotParent.GetComponent<RobotAI>().TakeDamage(bulletDamage);
+                if (other.GetComponent<RobotCollisionBox>().robotParent.GetComponent<RobotAI>())
+                {
+                    other.GetComponent<RobotCollisionBox>().robotParent.GetComponent<RobotAI>().TakeDamage(bulletDamage);
+                }
+                else if (other.GetComponent<RobotCollisionBox>().robotParent.GetComponent<UnfinishedRobot>())
+                {
+                    other.GetComponent<RobotCollisionBox>().robotParent.GetComponent<UnfinishedRobot>().TakeDamage(bulletDamage);
+                }
                 other.GetComponent<RobotCollisionBox>().BreakOff();
 
                 Debug.Log("Hit Robot 2");

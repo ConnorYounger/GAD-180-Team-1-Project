@@ -7,6 +7,7 @@ public class PlayerPlatformMovement : MonoBehaviour
     public bool control;
 
     public float movementSpeed = 0.1f;
+    private float counter = 0.1f;
 
     private Transform cam;
 
@@ -22,18 +23,26 @@ public class PlayerPlatformMovement : MonoBehaviour
             if (Input.GetKey(KeyCode.W))
             {
                 transform.Translate(cam.forward * movementSpeed);
+                transform.Translate(transform.up * (movementSpeed * counter));
             }
             if (Input.GetKey(KeyCode.S))
             {
                 transform.Translate(-cam.forward * movementSpeed);
+                transform.Translate(transform.up * (movementSpeed * counter));
             }
             if (Input.GetKey(KeyCode.A))
             {
                 transform.Translate(-cam.right * movementSpeed);
+                transform.Translate(transform.up * (movementSpeed * counter));
             }
             if (Input.GetKey(KeyCode.D))
             {
                 transform.Translate(cam.right * movementSpeed);
+                transform.Translate(transform.up * (movementSpeed * counter));
+            }
+            if (Input.GetKey(KeyCode.Space))
+            {
+                transform.Translate(transform.up * 2 * movementSpeed);
             }
         }
     }

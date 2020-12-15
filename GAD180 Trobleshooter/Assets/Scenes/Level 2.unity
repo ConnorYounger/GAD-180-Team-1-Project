@@ -615,6 +615,8 @@ MonoBehaviour:
   destroyBounds: []
   wanderingPaths: []
   spawnTriggered: 1
+  cleanUp: 0
+  animations: []
 --- !u!65 &71289412
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1010,6 +1012,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeOrbHit: 0
+  selectedOrb: 0
 --- !u!4 &103638764
 Transform:
   m_ObjectHideFlags: 0
@@ -1093,6 +1096,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeOrbHit: 0
+  selectedOrb: 0
 --- !u!95 &111598238
 Animator:
   serializedVersion: 3
@@ -2028,6 +2032,7 @@ GameObject:
   - component: {fileID: 249873454}
   - component: {fileID: 249873453}
   - component: {fileID: 249873452}
+  - component: {fileID: 249873456}
   m_Layer: 11
   m_Name: Platform
   m_TagString: Untagged
@@ -2122,6 +2127,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 249873450}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &249873456
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 249873450}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.9, y: 0.63365793, z: 0.9}
+  m_Center: {x: -0.000002384185, y: 0.8418296, z: -0.0000004768384}
 --- !u!4 &265902844 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 790269247285666669, guid: 43ef283afe073f74e880cef1a0046ec4,
@@ -3171,6 +3189,8 @@ MonoBehaviour:
   destroyBounds: []
   wanderingPaths: []
   spawnTriggered: 1
+  cleanUp: 0
+  animations: []
 --- !u!65 &423130386
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3743,6 +3763,7 @@ GameObject:
   - component: {fileID: 493306931}
   - component: {fileID: 493306930}
   - component: {fileID: 493306929}
+  - component: {fileID: 493306933}
   m_Layer: 11
   m_Name: Platform3
   m_TagString: Untagged
@@ -3837,6 +3858,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 493306927}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &493306933
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 493306927}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.9, y: 0.63365793, z: 0.9}
+  m_Center: {x: -0.000002384185, y: 0.8418296, z: -0.0000004768384}
 --- !u!1 &510753658
 GameObject:
   m_ObjectHideFlags: 0
@@ -3933,6 +3967,8 @@ MonoBehaviour:
   destroyBounds: []
   wanderingPaths: []
   spawnTriggered: 1
+  cleanUp: 0
+  animations: []
 --- !u!65 &537634696
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4134,7 +4170,7 @@ GameObject:
   - component: {fileID: 571565698}
   - component: {fileID: 571565697}
   - component: {fileID: 571565696}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Glass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4906,6 +4942,8 @@ MonoBehaviour:
   destroyBounds: []
   wanderingPaths: []
   spawnTriggered: 1
+  cleanUp: 0
+  animations: []
 --- !u!65 &790553955
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6046,6 +6084,8 @@ MonoBehaviour:
   destroyBounds: []
   wanderingPaths: []
   spawnTriggered: 1
+  cleanUp: 0
+  animations: []
 --- !u!65 &1000256504
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6474,6 +6514,8 @@ MonoBehaviour:
   destroyBounds: []
   wanderingPaths: []
   spawnTriggered: 1
+  cleanUp: 0
+  animations: []
 --- !u!65 &1026684453
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6889,6 +6931,8 @@ MonoBehaviour:
   destroyBounds: []
   wanderingPaths: []
   spawnTriggered: 1
+  cleanUp: 0
+  animations: []
 --- !u!65 &1093920462
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7380,6 +7424,8 @@ MonoBehaviour:
   destroyBounds: []
   wanderingPaths: []
   spawnTriggered: 1
+  cleanUp: 0
+  animations: []
 --- !u!65 &1168087051
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8674,6 +8720,8 @@ MonoBehaviour:
   destroyBounds: []
   wanderingPaths: []
   spawnTriggered: 1
+  cleanUp: 0
+  animations: []
 --- !u!65 &1415075584
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9383,6 +9431,8 @@ MonoBehaviour:
   destroyBounds: []
   wanderingPaths: []
   spawnTriggered: 1
+  cleanUp: 0
+  animations: []
 --- !u!65 &1495433157
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9772,6 +9822,8 @@ MonoBehaviour:
   destroyBounds: []
   wanderingPaths: []
   spawnTriggered: 1
+  cleanUp: 0
+  animations: []
 --- !u!65 &1541070601
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9875,6 +9927,7 @@ GameObject:
   - component: {fileID: 1560957129}
   - component: {fileID: 1560957128}
   - component: {fileID: 1560957127}
+  - component: {fileID: 1560957131}
   m_Layer: 11
   m_Name: Platform2
   m_TagString: Untagged
@@ -9969,6 +10022,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1560957125}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &1560957131
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1560957125}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.9, y: 0.63365793, z: 0.9}
+  m_Center: {x: -0.000002384185, y: 0.8418296, z: -0.0000004768384}
 --- !u!4 &1581376674 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 790269247285666669, guid: 43ef283afe073f74e880cef1a0046ec4,
@@ -10829,6 +10895,8 @@ MonoBehaviour:
   destroyBounds: []
   wanderingPaths: []
   spawnTriggered: 1
+  cleanUp: 0
+  animations: []
 --- !u!65 &1686532739
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11065,6 +11133,8 @@ MonoBehaviour:
   destroyBounds: []
   wanderingPaths: []
   spawnTriggered: 1
+  cleanUp: 0
+  animations: []
 --- !u!65 &1699193690
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11759,6 +11829,8 @@ MonoBehaviour:
   destroyBounds: []
   wanderingPaths: []
   spawnTriggered: 1
+  cleanUp: 0
+  animations: []
 --- !u!65 &1808149570
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14068,6 +14140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeOrbHit: 0
+  selectedOrb: 0
 --- !u!4 &7920600599471673498
 Transform:
   m_ObjectHideFlags: 0
@@ -14118,7 +14191,15 @@ MonoBehaviour:
   speedUpLaunchForce: 5000
   slowDownLaunchForce: 2000
   coolDown: 1
+  selectedOrb: 0
   timeOrbHit: 0
+  particles: {fileID: 0}
+  light: {fileID: 0}
+  speedUpColor: {r: 0, g: 0, b: 0, a: 0}
+  slowDownColor: {r: 0, g: 0, b: 0, a: 0}
+  meshRenderer: {fileID: 0}
+  speedUpMaterial: {fileID: 0}
+  slowDownMaterial: {fileID: 0}
 --- !u!4 &7920600599480227925
 Transform:
   m_ObjectHideFlags: 0
@@ -14339,6 +14420,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeOrbHit: 0
+  selectedOrb: 0
 --- !u!4 &7920600599713660354
 Transform:
   m_ObjectHideFlags: 0
@@ -14408,7 +14490,15 @@ MonoBehaviour:
   speedUpLaunchForce: 8000
   slowDownLaunchForce: 2000
   coolDown: 1
+  selectedOrb: 0
   timeOrbHit: 0
+  particles: {fileID: 0}
+  light: {fileID: 0}
+  speedUpColor: {r: 0, g: 0, b: 0, a: 0}
+  slowDownColor: {r: 0, g: 0, b: 0, a: 0}
+  meshRenderer: {fileID: 0}
+  speedUpMaterial: {fileID: 0}
+  slowDownMaterial: {fileID: 0}
 --- !u!4 &7920600599804268594
 Transform:
   m_ObjectHideFlags: 0
@@ -15206,7 +15296,15 @@ MonoBehaviour:
   speedUpLaunchForce: 5000
   slowDownLaunchForce: 2000
   coolDown: 1
+  selectedOrb: 0
   timeOrbHit: 0
+  particles: {fileID: 0}
+  light: {fileID: 0}
+  speedUpColor: {r: 0, g: 0, b: 0, a: 0}
+  slowDownColor: {r: 0, g: 0, b: 0, a: 0}
+  meshRenderer: {fileID: 0}
+  speedUpMaterial: {fileID: 0}
+  slowDownMaterial: {fileID: 0}
 --- !u!4 &7920600600445919519
 Transform:
   m_ObjectHideFlags: 0
@@ -15287,6 +15385,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeOrbHit: 0
+  selectedOrb: 0
 --- !u!4 &7920600600592871948
 Transform:
   m_ObjectHideFlags: 0
@@ -15397,7 +15496,15 @@ MonoBehaviour:
   speedUpLaunchForce: 11000
   slowDownLaunchForce: 5000
   coolDown: 1
+  selectedOrb: 0
   timeOrbHit: 0
+  particles: {fileID: 0}
+  light: {fileID: 0}
+  speedUpColor: {r: 0, g: 0, b: 0, a: 0}
+  slowDownColor: {r: 0, g: 0, b: 0, a: 0}
+  meshRenderer: {fileID: 0}
+  speedUpMaterial: {fileID: 0}
+  slowDownMaterial: {fileID: 0}
 --- !u!65 &7920600600617352248
 BoxCollider:
   m_ObjectHideFlags: 0

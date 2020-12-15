@@ -5066,7 +5066,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!136 &4311318926000820343
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -5242,6 +5242,7 @@ MonoBehaviour:
   meleeAttackTime: 1.2
   dropWeaponTime: 1
   repairTime: 5
+  selectedOrb: 0
   isAlive: 1
   isTriggered: 0
   timeOrbHit: 0
@@ -5539,7 +5540,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!136 &4311318926079177086
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -5817,7 +5818,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!136 &4311318926297982865
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -6335,7 +6336,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!136 &4311318926590932907
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -6768,7 +6769,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!136 &4311318926956776425
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -6792,7 +6793,7 @@ CharacterJoint:
   m_GameObject: {fileID: 4311318926956776426}
   m_ConnectedBody: {fileID: 4311318927593726479}
   m_Anchor: {x: 0, y: 0, z: 0}
-  m_Axis: {x: 1, y: 0, z: 0}
+  m_Axis: {x: 0, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: -9.0403773e-10, y: 0.044941913, z: 0.000000006706105}
   serializedVersion: 2
@@ -6801,7 +6802,7 @@ CharacterJoint:
     spring: 0
     damper: 0
   m_LowTwistLimit:
-    limit: -90
+    limit: 0
     bounciness: 0
     contactDistance: 0
   m_HighTwistLimit:
@@ -6812,7 +6813,7 @@ CharacterJoint:
     spring: 0
     damper: 0
   m_Swing1Limit:
-    limit: 0
+    limit: 177
     bounciness: 0
     contactDistance: 0
   m_Swing2Limit:
@@ -6893,7 +6894,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!136 &4311318926983965519
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -7173,7 +7174,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!65 &4311318927036791632
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7502,7 +7503,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!136 &4311318927168671339
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -7526,7 +7527,7 @@ CharacterJoint:
   m_GameObject: {fileID: 4311318927168671340}
   m_ConnectedBody: {fileID: 4311318926983965505}
   m_Anchor: {x: 0, y: 0, z: 0}
-  m_Axis: {x: -1, y: 0, z: 0}
+  m_Axis: {x: 0, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 9.43146e-10, y: 0.04494183, z: 0.000000006706105}
   serializedVersion: 2
@@ -7535,7 +7536,7 @@ CharacterJoint:
     spring: 0
     damper: 0
   m_LowTwistLimit:
-    limit: -90
+    limit: 0
     bounciness: 0
     contactDistance: 0
   m_HighTwistLimit:
@@ -7546,7 +7547,7 @@ CharacterJoint:
     spring: 0
     damper: 0
   m_Swing1Limit:
-    limit: 0
+    limit: 177
     bounciness: 0
     contactDistance: 0
   m_Swing2Limit:
@@ -8014,7 +8015,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4311318927551735775}
   - component: {fileID: 4311318927551735770}
-  - component: {fileID: 4311318927551735773}
   - component: {fileID: 4311318927551735772}
   - component: {fileID: 4311318927551735771}
   - component: {fileID: 3297979087492991436}
@@ -8057,20 +8057,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!135 &4311318927551735773
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4311318927551735774}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 0.02
-  m_Center: {x: 0, y: 0, z: -0.01}
+  m_CollisionDetection: 2
 --- !u!144 &4311318927551735772
 CharacterJoint:
   m_ObjectHideFlags: 0
@@ -8079,32 +8066,32 @@ CharacterJoint:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4311318927551735774}
   m_ConnectedBody: {fileID: 4311318927036791634}
-  m_Anchor: {x: 0, y: 0, z: 0}
-  m_Axis: {x: 1, y: 0, z: 0}
+  m_Anchor: {x: 0, y: 0, z: 0.003}
+  m_Axis: {x: -1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.004087611, y: 0.000000038146972, z: 0.049588718}
+  m_ConnectedAnchor: {x: 0.004087611, y: -0.000000038146972, z: 0.046588715}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_TwistLimitSpring:
     spring: 0
     damper: 0
   m_LowTwistLimit:
-    limit: -40
+    limit: -39.12899
     bounciness: 0
     contactDistance: 0
   m_HighTwistLimit:
-    limit: 25
+    limit: 26.476974
     bounciness: 0
     contactDistance: 0
   m_SwingLimitSpring:
     spring: 0
     damper: 0
   m_Swing1Limit:
-    limit: 25
+    limit: 3
     bounciness: 0
     contactDistance: 0
   m_Swing2Limit:
-    limit: 0
+    limit: 3
     bounciness: 0
     contactDistance: 0
   m_EnableProjection: 0
@@ -8194,7 +8181,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!136 &4311318927593726477
 CapsuleCollider:
   m_ObjectHideFlags: 0

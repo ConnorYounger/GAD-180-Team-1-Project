@@ -17,14 +17,14 @@ public class DoorScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.GetComponent<PlayerHealth>())
-        {
-            Open();
-        }
-
         if (gameObject.GetComponent<AudioSource>())
         {
             audioSource = gameObject.GetComponent<AudioSource>();
+        }
+
+        if (other.GetComponent<PlayerHealth>())
+        {
+            Open();
         }
     }
 

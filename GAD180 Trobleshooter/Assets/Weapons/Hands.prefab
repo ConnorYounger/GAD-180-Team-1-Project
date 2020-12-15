@@ -257,7 +257,7 @@ MonoBehaviour:
   meleeDamage: 1
   timeMultiplier: 2
   maxOrbRange: 100
-  meleeAttackTime: 1
+  meleeAttackTime: 0.8
   handOrb: {fileID: 3559036375779267764}
   projectileOrb: {fileID: 3316806485857512206, guid: b4c447efd069aa04696db9e49c7c5efd,
     type: 3}
@@ -269,6 +269,8 @@ MonoBehaviour:
   - {r: 0.84482574, g: 0, b: 1, a: 0.78431374}
   - {r: 1, g: 0, b: 0, a: 0.78431374}
   meleeAnimation: MeleeFistAttack
+  slowDownTimeSound: {fileID: 0}
+  speedUpTimeSound: {fileID: 0}
 --- !u!95 &9149518488415093748
 Animator:
   serializedVersion: 3
@@ -1059,6 +1061,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -56.278004
+      objectReference: {fileID: 0}
+    - target: {fileID: 2784336182156919759, guid: d1fcef5c51a7bcd498ee77a70270fd66,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3032829223031922547, guid: d1fcef5c51a7bcd498ee77a70270fd66,
         type: 3}

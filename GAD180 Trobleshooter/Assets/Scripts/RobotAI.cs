@@ -140,7 +140,7 @@ public class RobotAI : MonoBehaviour
             {
                 RaycastHit hit;
 
-                if (Physics.SphereCast(weapon.GetComponent<Weapon>().shootPoint.transform.position, 0.1f, weapon.GetComponent<Weapon>().shootPoint.transform.forward, out hit, 1000, ~15))
+                if (Physics.SphereCast(weapon.GetComponent<Weapon>().shootPoint.transform.position, 0.1f, weapon.GetComponent<Weapon>().shootPoint.transform.forward, out hit, 75, ~15))
                 {
                     Debug.DrawLine(weapon.GetComponent<Weapon>().shootPoint.transform.position, hit.point, Color.red);
 

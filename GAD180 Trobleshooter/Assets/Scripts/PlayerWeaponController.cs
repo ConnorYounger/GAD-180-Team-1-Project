@@ -105,6 +105,15 @@ public class PlayerWeaponController : MonoBehaviour
         int i = 0;
         foreach (GameObject weapon in weapons)
         {
+            if (weapon.GetComponent<Animator>())
+            {
+                weapon.GetComponent<Animator>().Rebind();
+
+                weapon.GetComponent<Animator>().enabled = true;
+
+                weapon.GetComponent<Animator>().SetBool("playerControlled", true);
+            }
+
             //Enable / Disable weapon
             if (i == selectedWeapon)
             {
@@ -259,6 +268,15 @@ public class PlayerWeaponController : MonoBehaviour
 
                     weapons[weapons.IndexOf(w)].SetActive(true);
                     selectedWeapon = weapons.IndexOf(w);
+
+                    if (w.GetComponent<Animator>())
+                    {
+                        w.GetComponent<Animator>().Rebind();
+
+                        w.GetComponent<Animator>().enabled = true;
+
+                        w.GetComponent<Animator>().SetBool("playerControlled", true);
+                    }
                 }
             }
 
