@@ -241,6 +241,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponMode: 0
   enemyControlled: 0
+  isWalking: 0
   weaponThrown: 0
   isReloading: 0
   mouseHold: 0
@@ -272,7 +273,10 @@ MonoBehaviour:
   ammoCounter: {fileID: 0}
   shootSound: {fileID: 8300000, guid: af77edc3f269c044c9f2ca249036b902, type: 3}
   reloadSound: {fileID: 8300000, guid: 5e4d61c81b81b7045aae939e5490b709, type: 3}
+  initReloadSound: {fileID: 8300000, guid: e0c70bed5c1a4443083a81de5648c7d5, type: 3}
   noAmmoSound: {fileID: 8300000, guid: c41bf86205f79894a83b64cb4d6e77fd, type: 3}
+  reloadSoundDelay: 0.8
+  shootPointTransform: {fileID: 0}
 --- !u!82 &8101785003408361865
 AudioSource:
   m_ObjectHideFlags: 0

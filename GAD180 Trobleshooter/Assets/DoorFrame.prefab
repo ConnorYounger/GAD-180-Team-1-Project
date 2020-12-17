@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6850735834467053897}
   - component: {fileID: 608442160865849101}
   - component: {fileID: 5078102885466524807}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Door2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 2104883140350778702}
   - component: {fileID: 7601375798192182818}
   - component: {fileID: 790269248896423478}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: DoorFrameBasic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -224,7 +224,7 @@ GameObject:
   - component: {fileID: 790269247285666670}
   - component: {fileID: 790269247285666666}
   - component: {fileID: 2251746345434927145}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: DoorFrame
   m_TagString: Door
   m_Icon: {fileID: 0}
@@ -429,7 +429,7 @@ GameObject:
   - component: {fileID: 1671647533398290938}
   - component: {fileID: 3906674842661146034}
   - component: {fileID: 5648380559008548366}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Door2.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -508,7 +508,7 @@ GameObject:
   - component: {fileID: 6820302064455839522}
   - component: {fileID: 9005294256072150566}
   - component: {fileID: 6594311217690432463}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Door1.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -587,7 +587,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7228681988848672901}
   - component: {fileID: 5964673793316809120}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -681,7 +681,7 @@ GameObject:
   - component: {fileID: 790948297173598472}
   - component: {fileID: 8305753539386948891}
   - component: {fileID: 5627171630348350301}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Door1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

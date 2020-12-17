@@ -9,7 +9,7 @@ public class Weapon : MonoBehaviour
     public bool enemyControlled = false;
     private bool canShoot = true;
     private bool meleeAttack;
-    private bool isWalking;
+    public bool isWalking;
     public bool weaponThrown;
     public bool isReloading;
     public bool mouseHold;
@@ -55,9 +55,16 @@ public class Weapon : MonoBehaviour
 
     public AudioClip shootSound;
     public AudioClip reloadSound;
+    public AudioClip initReloadSound;
     public AudioClip noAmmoSound;
 
+    public float reloadSoundDelay = 1f;
+
     private AudioSource audioSource;
+    public Transform shootPointTransform;
+
+    public GameObject resetModel;
+    public Transform resetTransform;
 
     private void Awake()
     {
@@ -103,6 +110,11 @@ public class Weapon : MonoBehaviour
         if (gameObject.GetComponent<Rigidbody>())
         {
             rb = gameObject.GetComponent<Rigidbody>();
+        }
+
+        if (muzzleFlashPoint)
+        {
+            shootPointTransform = muzzleFlashPoint.transform;
         }
     }
 
@@ -326,12 +338,24 @@ public class Weapon : MonoBehaviour
         }
         if (reloadSound && audioSource)
         {
+            audioSource.clip = initReloadSound;
+
+            audioSource.Play();
+
+            Invoke("PlaySound", reloadSoundDelay);
+        }
+
+        Invoke("FinishReloading", reloadTime);
+    }
+
+    void PlaySound()
+    {
+        if (reloadSound && audioSource)
+        {
             audioSource.clip = reloadSound;
 
             audioSource.Play();
         }
-
-        Invoke("FinishReloading", reloadTime);
     }
 
     private void FinishReloading()
@@ -443,6 +467,12 @@ public class Weapon : MonoBehaviour
             animator.SetBool("playerControlled", false);
 
             animator.enabled = false;
+        }
+
+        if(resetModel && resetTransform)
+        {
+            resetModel.transform.position = resetTransform.position;
+            resetModel.transform.rotation = resetTransform.rotation;
         }
 
         gameObject.GetComponent<Rigidbody>().isKinematic = false;

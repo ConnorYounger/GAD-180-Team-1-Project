@@ -18,7 +18,7 @@ public class UnfinishedRobot : MonoBehaviour
     public AudioClip deathSound;
     public AudioClip[] otherDeathSounds;
 
-    public Animator deathStop;
+    public Animator parentObject;
 
     public float startDespawnTime = 55;
     public float despawnTime = 10;
@@ -41,9 +41,9 @@ public class UnfinishedRobot : MonoBehaviour
             audioSource = gameObject.GetComponent<AudioSource>();
         }
 
-        if (deathStop)
+        if (parentObject)
         {
-            Destroy(deathStop.gameObject, startDespawnTime);
+            Destroy(parentObject.gameObject, startDespawnTime);
         }
     }
 
@@ -131,11 +131,11 @@ public class UnfinishedRobot : MonoBehaviour
 
     public void Die()
     {
-        if (deathStop)
+        if (parentObject)
         {
-            deathStop.enabled = false;
+            parentObject.enabled = false;
 
-            Destroy(deathStop.gameObject, despawnTime);
+            Destroy(parentObject.gameObject, despawnTime);
         }
 
         isAlive = false;

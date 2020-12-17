@@ -35,6 +35,7 @@ public class TimeHand : MonoBehaviour
     private bool canMeleeAttack = true;
     private bool speedUpOrb;
     private bool slowDownOrb;
+    public bool isWalking;
 
     private RaycastHit hit;
 
@@ -77,6 +78,22 @@ public class TimeHand : MonoBehaviour
         }
 
         Debug.DrawLine(playerCam.transform.position, hit.point, Color.green);
+
+        if (animator)
+        {
+            if ((Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)) && !isWalking)
+            {
+                isWalking = true;
+
+                animator.SetBool("isWalking", true);
+            }
+            else if (!(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)) && isWalking)
+            {
+                isWalking = false;
+
+                animator.SetBool("isWalking", false);
+            }
+        }
     }
 
     private void LaunchOrb()

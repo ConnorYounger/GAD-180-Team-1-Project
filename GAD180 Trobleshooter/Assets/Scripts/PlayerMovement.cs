@@ -48,6 +48,8 @@ public class PlayerMovement : MonoBehaviour {
     private Vector3 normalVector = Vector3.up;
     private Vector3 wallNormalVector;
 
+    public bool canLook = true;
+
     void Awake() {
         rb = GetComponent<Rigidbody>();
     }
@@ -67,7 +69,10 @@ public class PlayerMovement : MonoBehaviour {
 
     private void Update() {
         MyInput();
-        Look();
+        if (canLook)
+        {
+            Look();
+        }
     }
 
     /// <summary>

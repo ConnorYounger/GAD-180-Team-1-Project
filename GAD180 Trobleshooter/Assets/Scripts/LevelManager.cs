@@ -6,6 +6,8 @@ public class LevelManager : MonoBehaviour
 {
     public GameObject deathMenu;
     public GameObject pauseMenu;
+    public GameObject player;
+    public GameObject playerCamWeaponPoint;
 
     public bool isPaused;
     public bool playerIsDead;
@@ -25,20 +27,30 @@ public class LevelManager : MonoBehaviour
             Time.timeScale = 0;
             pauseMenu.SetActive(true);
 
+            isPaused = true;
+            if (player)
+            {
+                player.GetComponent<PlayerMovement>().enabled = false;
+                playerCamWeaponPoint.SetActive(false);
+            }
+
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
-
-            isPaused = true;
         }
         else
         {
             Time.timeScale = 1;
             pauseMenu.SetActive(false);
 
+            isPaused = false;
+            if (player)
+            {
+                player.GetComponent<PlayerMovement>().enabled = true;
+                playerCamWeaponPoint.SetActive(true);
+            }
+
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
-
-            isPaused = false;
         }
     }
 
@@ -46,6 +58,12 @@ public class LevelManager : MonoBehaviour
     {
         Time.timeScale = 0;
         deathMenu.SetActive(true);
+
+        if (player)
+        {
+            player.GetComponent<PlayerMovement>().enabled = false;
+            playerCamWeaponPoint.SetActive(false);
+        }
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;

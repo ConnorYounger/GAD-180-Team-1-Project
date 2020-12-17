@@ -23,6 +23,7 @@ public class PlayerHealth : MonoBehaviour
 
     public Animator hUDColorAnimator;
 
+    public AudioClip playerHitSound;
     private AudioSource audioSource;
 
     public TMP_Text healthText;
@@ -36,6 +37,14 @@ public class PlayerHealth : MonoBehaviour
         if (gameObject.GetComponent<AudioSource>())
         {
             audioSource = gameObject.GetComponent<AudioSource>();
+        }
+    }
+
+    private void Update()
+    {
+        if(health <= 1 && ppVolume.profile != deathppfx && !ppVolume.gameObject.GetComponent<PlayerTimeController>().timeIsSlow)
+        {
+            ppVolume.profile = deathppfx;
         }
     }
 
@@ -60,8 +69,9 @@ public class PlayerHealth : MonoBehaviour
                 hUDColorAnimator.Play("PlayerHitRedFx");
             }
 
-            if (audioSource)
+            if (audioSource && playerHitSound)
             {
+                audioSource.clip = playerHitSound;
                 audioSource.Play();
             }
         }
@@ -83,7 +93,7 @@ public class PlayerHealth : MonoBehaviour
 
         DisplayHealth();
 
-        if (health > 1)
+        if (health > 1 && !ppVolume.gameObject.GetComponent<PlayerTimeController>().timeIsSlow)
         {
             ppVolume.profile = defultppfx;
         }

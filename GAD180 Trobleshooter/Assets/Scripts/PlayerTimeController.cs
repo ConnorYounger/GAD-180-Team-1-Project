@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Rendering.PostProcessing;
 
 public class PlayerTimeController : MonoBehaviour
 {
@@ -9,11 +10,16 @@ public class PlayerTimeController : MonoBehaviour
     public float coolDownTime = 30;
     private float currentTimeJuice;
 
+    public AudioClip timeSlowSound;
     private AudioSource audioSource;
 
     public TMP_Text timeSlowText;
 
-    private bool timeIsSlow = false;
+    public PostProcessVolume ppVolume;
+    public PostProcessProfile defultppfx;
+    public PostProcessProfile timeSlowppfx;
+
+    public bool timeIsSlow = false;
 
     void Start()
     {
@@ -54,6 +60,13 @@ public class PlayerTimeController : MonoBehaviour
 
             Time.timeScale = 1f;
 
+            ppVolume.profile = defultppfx;
+
+            if (audioSource)
+            {
+                audioSource.Stop();
+            }
+
             timeIsSlow = false;
         }
 
@@ -78,10 +91,9 @@ public class PlayerTimeController : MonoBehaviour
             Time.timeScale = 0.5f;
             timeIsSlow = true;
 
-            if(audioSource)
-            {
-                audioSource.Play();
-            }
+            ppVolume.profile = timeSlowppfx;
+
+            PlaySound();
         }
         else if (currentTimeJuice < maxTimeJuice)
         {
@@ -90,16 +102,32 @@ public class PlayerTimeController : MonoBehaviour
                 Time.timeScale = 0.5f;
                 timeIsSlow = true;
 
-                if (audioSource)
-                {
-                    audioSource.Play();
-                }
+                ppVolume.profile = timeSlowppfx;
+
+                PlaySound();
             }
             else
             {
                 Time.timeScale = 1f;
                 timeIsSlow = false;
+
+                if (audioSource)
+                {
+                    audioSource.Stop();
+                }
+
+                ppVolume.profile = defultppfx;
             }
+        }
+    }
+
+    public void PlaySound()
+    {
+        if (audioSource && timeIsSlow)
+        {
+            audioSource.clip = timeSlowSound;
+
+            audioSource.Play();
         }
     }
 

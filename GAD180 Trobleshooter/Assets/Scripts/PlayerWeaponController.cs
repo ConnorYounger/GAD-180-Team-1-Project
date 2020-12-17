@@ -29,6 +29,7 @@ public class PlayerWeaponController : MonoBehaviour
 
     private bool hasHands;
 
+    public AudioClip throwSound;
     private AudioSource audioSource;
 
     void Start()
@@ -128,6 +129,15 @@ public class PlayerWeaponController : MonoBehaviour
                     ammoCounter.text = "";
                 }
 
+                if (weapon.GetComponent<Weapon>())
+                {
+                    weapon.GetComponent<Weapon>().isWalking = false;
+                }
+                else if (weapon.GetComponent<TimeHand>())
+                {
+                    weapon.GetComponent<TimeHand>().isWalking = false;
+                }
+
                 if (weapon.GetComponent<Animator>())
                 {
                     weapon.GetComponent<Animator>().Rebind();
@@ -160,21 +170,35 @@ public class PlayerWeaponController : MonoBehaviour
         {
             if(w.GetComponent<Weapon>() && w.GetComponent<Weapon>().weaponID == weapon.GetComponent<Weapon>().weaponID && weapon.GetComponent<Weapon>().projectile)
             {
+                bool pickedUpAmmo;
+                pickedUpAmmo = false;
+
                 while (weapon.GetComponent<Weapon>().ammoInClip > 0 && w.GetComponent<Weapon>().ammoOutClip < w.GetComponent<Weapon>().maxClipSize)
                 {
                     w.GetComponent<Weapon>().ammoOutClip++;
                     weapon.GetComponent<Weapon>().ammoInClip--;
+
+                    pickedUpAmmo = true;
                 }
 
                 if (weapon.GetComponent<Weapon>().ammoOutClip > 0 && w.GetComponent<Weapon>().ammoOutClip < w.GetComponent<Weapon>().maxClipSize)
                 {
                     w.GetComponent<Weapon>().ammoOutClip++;
                     weapon.GetComponent<Weapon>().ammoOutClip--;
+
+                    pickedUpAmmo = true;
                 }
 
                 if (weapon.GetComponent<Weapon>().ammoOutClip == 0 && weapon.GetComponent<Weapon>().ammoInClip == 0)
                 {
                     weapon.SetActive(false);
+                }
+
+                if(pickedUpAmmo == true && w.GetComponent<AudioSource>() && w.GetComponent<Weapon>().initReloadSound)
+                {
+                    w.GetComponent<AudioSource>().clip = w.GetComponent<Weapon>().initReloadSound;
+
+                    w.GetComponent<AudioSource>().Play();
                 }
 
                 w.GetComponent<Weapon>().UpdateAmmoCounter();
@@ -183,7 +207,7 @@ public class PlayerWeaponController : MonoBehaviour
             }
         }
 
-        //Debug.Log("picked up " + weapon.name);
+        Debug.Log("picked up " + weapon.name);
 
         weapon.transform.position = weaponPosition.position;
         weapon.transform.rotation = weaponPosition.rotation;
@@ -194,6 +218,13 @@ public class PlayerWeaponController : MonoBehaviour
         weapons.Add(weapon);
 
         weapon.GetComponent<Weapon>().PickedUp(gameObject, ammoCounter);
+
+        /*
+        if (weapon.GetComponent<Weapon>().muzzleFlashPoint && weapon.GetComponent<Weapon>().shootPointTransform && weapon.GetComponent<Weapon>().muzzleFlashPoint.transform.GetChild(0) != null)
+        {
+            weapon.GetComponent<Weapon>().muzzleFlashPoint.transform.GetChild(0).transform.rotation = weapon.GetComponent<Weapon>().shootPointTransform.rotation;
+        }
+        */
 
         selectedWeapon = weapons.Count - 1;
     }
@@ -235,7 +266,7 @@ public class PlayerWeaponController : MonoBehaviour
     {
         GameObject weapon = weapons[selectedWeapon];
 
-        //Debug.Log("Throw " + weapon.name);
+        Debug.Log("Throw " + weapon.name);
 
         if (weapon.GetComponent<Weapon>())
         {
@@ -298,7 +329,11 @@ public class PlayerWeaponController : MonoBehaviour
 
         if (audioSource)
         {
+            audioSource.clip = throwSound;
+
             audioSource.Play();
+
+            gameObject.GetComponent<PlayerTimeController>().Invoke("PlaySound", throwSound.length);
         }
     }
 

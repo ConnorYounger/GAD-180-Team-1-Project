@@ -51,6 +51,7 @@ public class RobotAI : MonoBehaviour
     public GameObject visionRaycaster;
     public GameObject revivedRobot;
     public GameObject destroyFx;
+    public GameObject arm2Collision;
     //public GameObject[] meleeHitBoxes;
     private GameObject weaponProjectile;
     private GameObject player;
@@ -77,6 +78,8 @@ public class RobotAI : MonoBehaviour
     public ParticleSystem reviveRobotFx;
 
     public AudioClip deathSound;
+    public AudioClip alertSound;
+    public AudioClip walkingSound;
     public AudioClip[] otherDeathSounds;
 
     private AudioSource audioSource;
@@ -133,7 +136,7 @@ public class RobotAI : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.J))
             {
-                Die();
+                //Die();
             }
 
             if (isTriggered && weapon && weapon.gameObject.GetComponent<Weapon>().projectile && attackTimer > 0)
@@ -166,21 +169,34 @@ public class RobotAI : MonoBehaviour
 
     public void Trigger()
     {
-        isTriggered = true;
-
-        animator.SetBool("isTriggered", true);
-
-        visionTrigger.SetActive(false);
-
-        if (weapon && enemyType == 1)
+        if (isAlive)
         {
-            if(weapon.GetComponent<Weapon>().projectile != null)
+            isTriggered = true;
+
+            animator.SetBool("isTriggered", true);
+
+            visionTrigger.SetActive(false);
+
+            if (weapon && enemyType == 1)
             {
-                meleeWeapon = false;
+                if (weapon.GetComponent<Weapon>().projectile != null)
+                {
+                    meleeWeapon = false;
 
-                navMesh.enabled = false;
+                    navMesh.enabled = false;
 
-                animator.Play(aimAnimation);
+                    animator.Play(aimAnimation);
+                }
+                else
+                {
+                    meleeWeapon = true;
+
+                    animator.SetBool("meleeAttack", false);
+                    animator.SetBool("isRunning", true);
+                    animator.SetBool("isWalking", false);
+
+                    //animator.Play(runningAnimation);
+                }
             }
             else
             {
@@ -192,30 +208,40 @@ public class RobotAI : MonoBehaviour
 
                 //animator.Play(runningAnimation);
             }
-        }
-        else
-        {
-            meleeWeapon = true;
 
-            animator.SetBool("meleeAttack", false);
-            animator.SetBool("isRunning", true);
-            animator.SetBool("isWalking", false);
+            navMesh.speed = movementSpeed;
 
-            //animator.Play(runningAnimation);
-        }
-
-        navMesh.speed = movementSpeed;
-
-        GameObject[] robots = GameObject.FindGameObjectsWithTag("Enemy");
-        foreach(GameObject robot in robots)
-        {
-            if (robot.GetComponent<RobotAI>() && !robot.GetComponent<RobotAI>().isTriggered)
+            GameObject[] robots = GameObject.FindGameObjectsWithTag("Enemy");
+            foreach (GameObject robot in robots)
             {
-                robot.GetComponent<RobotAI>().PlayerTrigger();
+                if (robot.GetComponent<RobotAI>() && !robot.GetComponent<RobotAI>().isTriggered)
+                {
+                    robot.GetComponent<RobotAI>().PlayerTrigger();
+                }
             }
-        }
 
-        //animator.SetBool("isTriggered", true);
+            if (alertSound && audioSource)
+            {
+                audioSource.clip = alertSound;
+
+                audioSource.Play();
+
+                Invoke("PlayWalkingSound", audioSource.clip.length);
+            }
+
+            //animator.SetBool("isTriggered", true);
+        }
+    }
+
+    void PlayWalkingSound()
+    {
+        if (alertSound && walkingSound)
+        {
+            audioSource.clip = walkingSound;
+            audioSource.loop = true;
+
+            //audioSource.Play();
+        }
     }
 
     public void LookForPlayer()
@@ -575,6 +601,17 @@ public class RobotAI : MonoBehaviour
 
         if (weapon)
         {
+            if (weapon.GetComponent<BoxCollider>() && arm2Collision)
+            {
+                arm2Collision.GetComponent<CapsuleCollider>().height = 0.04f;
+                arm2Collision.GetComponent<CapsuleCollider>().center = new Vector3(0, 0.02f, 0);
+
+                if (arm2Collision.GetComponent<BoxCollider>())
+                {
+                    arm2Collision.GetComponent<BoxCollider>().enabled = true;
+                }
+            }
+
             Invoke("DropWeapon", dropWeaponTime);
         }
 
@@ -600,6 +637,8 @@ public class RobotAI : MonoBehaviour
             if (deathSound)
             {
                 audioSource.clip = deathSound;
+
+                audioSource.loop = false;
 
                 audioSource.Play();
             }

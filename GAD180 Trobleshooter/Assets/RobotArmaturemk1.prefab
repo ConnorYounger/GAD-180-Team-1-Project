@@ -5256,6 +5256,7 @@ MonoBehaviour:
   visionRaycaster: {fileID: 7867470058289268105}
   revivedRobot: {fileID: 0}
   destroyFx: {fileID: 100014, guid: 5332791ebce075d4a9e56f4581e7fb47, type: 3}
+  arm2Collision: {fileID: 4311318926956776426}
   robots: []
   hasWanderingPath: 0
   wanderPoints: []
@@ -5265,6 +5266,8 @@ MonoBehaviour:
   slowDownParticles: {fileID: 8964873737949947358}
   reviveRobotFx: {fileID: 0}
   deathSound: {fileID: 8300000, guid: 6817bdf8f25e30245a58560d9af501d0, type: 3}
+  alertSound: {fileID: 8300000, guid: 8720072ae4d7e9c42b137210e7606b03, type: 3}
+  walkingSound: {fileID: 8300000, guid: da4544dfcdeabf640a04bec959f102b5, type: 3}
   otherDeathSounds:
   - {fileID: 8300000, guid: ce1d1e41f67472445b80a2148ef4f8ba, type: 3}
   - {fileID: 8300000, guid: 9f0a7f2d69b984c41bdedfb39050ed10, type: 3}
@@ -6731,7 +6734,8 @@ GameObject:
   - component: {fileID: 4311318926956776425}
   - component: {fileID: 4311318926956776424}
   - component: {fileID: 4311318926956776439}
-  m_Layer: 13
+  - component: {fileID: 1678024589672946516}
+  m_Layer: 19
   m_Name: RightArm2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6783,7 +6787,7 @@ CapsuleCollider:
   m_Radius: 0.0141104935
   m_Height: 0.07055247
   m_Direction: 1
-  m_Center: {x: 0, y: 0.035276234, z: 0}
+  m_Center: {x: 0, y: 0.03527623, z: 0}
 --- !u!144 &4311318926956776424
 CharacterJoint:
   m_ObjectHideFlags: 0
@@ -6844,6 +6848,19 @@ MonoBehaviour:
   robotParent: {fileID: 4311318926002829878}
   destroyFx: {fileID: 3688011094407191285, guid: be3fb59a822f51a4aa9cb3347837381b,
     type: 3}
+--- !u!65 &1678024589672946516
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4311318926956776426}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 0.03, y: 0.06, z: 0.01}
+  m_Center: {x: 0, y: 0.08, z: 0}
 --- !u!1 &4311318926983965507
 GameObject:
   m_ObjectHideFlags: 0

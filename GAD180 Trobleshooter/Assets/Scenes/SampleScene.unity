@@ -166,6 +166,10 @@ MonoBehaviour:
   maxTimeJuice: 0
   coolDownTime: 30
   timeSlowText: {fileID: 0}
+  ppVolume: {fileID: 0}
+  defultppfx: {fileID: 0}
+  timeSlowppfx: {fileID: 0}
+  timeIsSlow: 0
 --- !u!1 &71361162
 GameObject:
   m_ObjectHideFlags: 0
@@ -2037,6 +2041,7 @@ MonoBehaviour:
   visionRaycaster: {fileID: 344712255}
   revivedRobot: {fileID: 0}
   destroyFx: {fileID: 0}
+  arm2Collision: {fileID: 0}
   robots: []
   hasWanderingPath: 0
   wanderPoints: []
@@ -2385,6 +2390,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponMode: 0
   enemyControlled: 0
+  isWalking: 0
   weaponThrown: 0
   isReloading: 0
   mouseHold: 0
@@ -2416,6 +2422,10 @@ MonoBehaviour:
   ammoCounter: {fileID: 0}
   shootSound: {fileID: 0}
   reloadSound: {fileID: 0}
+  initReloadSound: {fileID: 0}
+  noAmmoSound: {fileID: 0}
+  reloadSoundDelay: 1
+  shootPointTransform: {fileID: 0}
 --- !u!136 &414134225
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -6341,6 +6351,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponMode: 0
   enemyControlled: 0
+  isWalking: 0
   weaponThrown: 0
   isReloading: 0
   mouseHold: 0
@@ -6371,6 +6382,10 @@ MonoBehaviour:
   ammoCounter: {fileID: 0}
   shootSound: {fileID: 0}
   reloadSound: {fileID: 0}
+  initReloadSound: {fileID: 0}
+  noAmmoSound: {fileID: 0}
+  reloadSoundDelay: 1
+  shootPointTransform: {fileID: 0}
 --- !u!54 &1396597286
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -10188,6 +10203,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2363094880535560083, guid: 236a92462ff3a914e87ee8a44d7f4915,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2363094880535560084, guid: 236a92462ff3a914e87ee8a44d7f4915,
         type: 3}
       propertyPath: hUDColorAnimator
@@ -11052,6 +11072,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7050297175329239665, guid: 6a4418deaca6ac24e88b136fef94a15b,
+        type: 3}
+      propertyPath: startingAmmo
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 7376076573671959610, guid: 6a4418deaca6ac24e88b136fef94a15b,
         type: 3}
       propertyPath: m_LocalPosition.x

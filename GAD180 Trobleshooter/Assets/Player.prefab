@@ -172,6 +172,7 @@ MonoBehaviour:
   slideForce: 400
   slideCounterMovement: 0.2
   jumpForce: 650
+  canLook: 1
 --- !u!114 &2363094880535560084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,6 +193,7 @@ MonoBehaviour:
   playerCam: {fileID: 0}
   levelManager: {fileID: 0}
   hUDColorAnimator: {fileID: 0}
+  playerHitSound: {fileID: 8300000, guid: 561ff9ece6e393447b432a364f75b1fc, type: 3}
   healthText: {fileID: 0}
 --- !u!82 &6955841723919342481
 AudioSource:

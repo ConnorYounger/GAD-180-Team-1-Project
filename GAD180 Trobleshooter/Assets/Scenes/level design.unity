@@ -14,8 +14,8 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_Fog: 0
-  m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_Fog: 1
+  m_FogColor: {r: 0.69411767, g: 1, b: 1, a: 1}
   m_FogMode: 3
   m_FogDensity: 0.01
   m_LinearFogStart: 0
@@ -764,6 +764,26 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2949534401187527654, guid: 38c8bad94c0a182479c00aa415d62eaf,
+        type: 3}
+      propertyPath: scene
+      value: level design
+      objectReference: {fileID: 0}
+    - target: {fileID: 3070635212630993683, guid: 38c8bad94c0a182479c00aa415d62eaf,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 977820965}
+    - target: {fileID: 3070635212630993683, guid: 38c8bad94c0a182479c00aa415d62eaf,
+        type: 3}
+      propertyPath: playerCamWeaponPoint
+      value: 
+      objectReference: {fileID: 2071243735}
+    - target: {fileID: 5686948595011689916, guid: 38c8bad94c0a182479c00aa415d62eaf,
+        type: 3}
+      propertyPath: scene
+      value: level design
+      objectReference: {fileID: 0}
     - target: {fileID: 5689371024257243352, guid: 38c8bad94c0a182479c00aa415d62eaf,
         type: 3}
       propertyPath: m_Name
@@ -772,7 +792,7 @@ PrefabInstance:
     - target: {fileID: 5689371024257243352, guid: 38c8bad94c0a182479c00aa415d62eaf,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5689371024257243356, guid: 38c8bad94c0a182479c00aa415d62eaf,
         type: 3}
@@ -880,6 +900,11 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5865487905941647150, guid: 38c8bad94c0a182479c00aa415d62eaf,
+        type: 3}
+      propertyPath: scene
+      value: level design
+      objectReference: {fileID: 0}
+    - target: {fileID: 7869226748905876659, guid: 38c8bad94c0a182479c00aa415d62eaf,
         type: 3}
       propertyPath: scene
       value: level design
@@ -1013,6 +1038,8 @@ MonoBehaviour:
   destroyBounds: []
   wanderingPaths: []
   spawnTriggered: 1
+  cleanUp: 0
+  animations: []
 --- !u!1 &624244760
 GameObject:
   m_ObjectHideFlags: 0
@@ -1317,6 +1344,8 @@ MonoBehaviour:
   destroyBounds: []
   wanderingPaths: []
   spawnTriggered: 1
+  cleanUp: 0
+  animations: []
 --- !u!65 &870441215
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1541,6 +1570,12 @@ PrefabInstance:
       objectReference: {fileID: 590634551}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 236a92462ff3a914e87ee8a44d7f4915, type: 3}
+--- !u!1 &977820965 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2363094880535560083, guid: 236a92462ff3a914e87ee8a44d7f4915,
+    type: 3}
+  m_PrefabInstance: {fileID: 977820964}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1017501547
 GameObject:
   m_ObjectHideFlags: 0
@@ -1982,6 +2017,8 @@ MonoBehaviour:
   destroyBounds: []
   wanderingPaths: []
   spawnTriggered: 1
+  cleanUp: 0
+  animations: []
 --- !u!65 &1248279183
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2128,6 +2165,8 @@ MonoBehaviour:
   destroyBounds: []
   wanderingPaths: []
   spawnTriggered: 1
+  cleanUp: 0
+  animations: []
 --- !u!65 &1300213367
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2290,6 +2329,8 @@ MonoBehaviour:
   destroyBounds: []
   wanderingPaths: []
   spawnTriggered: 1
+  cleanUp: 0
+  animations: []
 --- !u!65 &1337100921
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2435,6 +2476,8 @@ MonoBehaviour:
   destroyBounds: []
   wanderingPaths: []
   spawnTriggered: 1
+  cleanUp: 0
+  animations: []
 --- !u!65 &1396770751
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2975,6 +3018,8 @@ MonoBehaviour:
   destroyBounds: []
   wanderingPaths: []
   spawnTriggered: 1
+  cleanUp: 0
+  animations: []
 --- !u!65 &1753859053
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3329,6 +3374,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ea0f0e007d79d54e97896751c3e68f4, type: 3}
+--- !u!1 &2071243735 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5912003463172186432, guid: 6ea0f0e007d79d54e97896751c3e68f4,
+    type: 3}
+  m_PrefabInstance: {fileID: 2071243734}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2110970706
 GameObject:
   m_ObjectHideFlags: 0

@@ -29,6 +29,8 @@ public class LaunchPlatform : MonoBehaviour
     public Material speedUpMaterial;
     public Material slowDownMaterial;
 
+    private AudioSource audioSource;
+
     void Start()
     {
         currentLaunchForce = normalLaunchForce;
@@ -45,6 +47,11 @@ public class LaunchPlatform : MonoBehaviour
         if (light)
         {
             defultLightColour = light.color;
+        }
+
+        if (gameObject.GetComponent<AudioSource>())
+        {
+            audioSource = gameObject.GetComponent<AudioSource>();
         }
     }
 
@@ -65,6 +72,11 @@ public class LaunchPlatform : MonoBehaviour
                 other.GetComponent<PlayerMovement>().Jump();
             }
             other.gameObject.GetComponent<Rigidbody>().AddForce(transform.up * currentLaunchForce);
+
+            if (audioSource)
+            {
+                audioSource.Play();
+            }
 
             canLaunch = false;
 
