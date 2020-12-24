@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5410023115926552839}
   - component: {fileID: -3696637454191828548}
   - component: {fileID: -1856029333578544067}
+  - component: {fileID: 6927748749858103026}
   m_Layer: 14
   m_Name: DalekRobotWeapon
   m_TagString: Untagged
@@ -47,12 +48,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponMode: 0
   enemyControlled: 0
+  isWalking: 0
   weaponThrown: 0
+  isReloading: 0
   mouseHold: 0
   bulletsPerShot: 1
   weaponType: 0
   weaponID: 6
   spread: 0
+  playerSpread: 0
   clipSize: 10
   maxClipSize: 30
   startingAmmo: 10
@@ -68,11 +72,20 @@ MonoBehaviour:
   bulletDestroyTime: 10
   meleeTime: 0.1
   attackAnimation: 
-  projectile: {fileID: 453169389759405866, guid: ff5b0f5a721530e45b0114817dd14e67,
+  projectile: {fileID: 1804256289490865805, guid: 2500291f9c992854cb9e16fab8e48fec,
     type: 3}
   shootPoint: {fileID: 500513289029460938}
   muzzleFlashPoint: {fileID: 500513289029460938}
+  arms: {fileID: 0}
   ammoCounter: {fileID: 0}
+  shootSound: {fileID: 8300000, guid: c5ab43eb861ef3c4db4600527c3ec29b, type: 3}
+  reloadSound: {fileID: 0}
+  initReloadSound: {fileID: 0}
+  noAmmoSound: {fileID: 0}
+  reloadSoundDelay: 1
+  shootPointTransform: {fileID: 0}
+  resetModel: {fileID: 0}
+  resetTransform: {fileID: 0}
 --- !u!54 &-3696637454191828548
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -102,3 +115,99 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!82 &6927748749858103026
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500513289029460938}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 0.5
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 5
+  MaxDistance: 1000
+  Pan2D: 0
+  rolloffMode: 1
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.75
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

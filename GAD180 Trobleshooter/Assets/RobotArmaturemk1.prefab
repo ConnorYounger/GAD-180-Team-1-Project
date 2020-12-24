@@ -5232,6 +5232,7 @@ MonoBehaviour:
   startingHealth: 1
   assultRifleBurstNumber: 4
   currentAssultRifleBurstNumber: 0
+  numberOfRevives: 3
   turningSpeed: 3
   movementSpeed: 3.5
   walkingMovementSpeed: 1.5
@@ -5257,6 +5258,7 @@ MonoBehaviour:
   revivedRobot: {fileID: 0}
   destroyFx: {fileID: 100014, guid: 5332791ebce075d4a9e56f4581e7fb47, type: 3}
   arm2Collision: {fileID: 4311318926956776426}
+  meleeHitBox: {fileID: 5489285977011065177}
   robots: []
   hasWanderingPath: 0
   wanderPoints: []
@@ -5271,6 +5273,7 @@ MonoBehaviour:
   otherDeathSounds:
   - {fileID: 8300000, guid: ce1d1e41f67472445b80a2148ef4f8ba, type: 3}
   - {fileID: 8300000, guid: 9f0a7f2d69b984c41bdedfb39050ed10, type: 3}
+  dalekMeshes: []
 --- !u!195 &4311318926002829879
 NavMeshAgent:
   m_ObjectHideFlags: 0

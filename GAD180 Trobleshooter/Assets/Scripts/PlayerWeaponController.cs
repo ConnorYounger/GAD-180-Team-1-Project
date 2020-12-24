@@ -368,4 +368,12 @@ public class PlayerWeaponController : MonoBehaviour
             }
         }
     }
+
+    public void ResetAnimator()
+    {
+        if (weapons[selectedWeapon].GetComponent<Animator>())
+        {
+            weapons[selectedWeapon].GetComponent<Animator>().Rebind();
+        }
+    }
 }

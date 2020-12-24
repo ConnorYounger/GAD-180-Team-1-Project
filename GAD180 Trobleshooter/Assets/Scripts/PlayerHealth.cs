@@ -7,7 +7,7 @@ using TMPro;
 public class PlayerHealth : MonoBehaviour
 {
     public int health = 5;
-    private int startingHealth;
+    public int startingHealth;
 
     public float playerHitCooldown = 1;
 
@@ -124,6 +124,8 @@ public class PlayerHealth : MonoBehaviour
         if (levelManager)
         {
             levelManager.GetComponent<LevelManager>().PlayerDeath();
+
+            playerCam.GetComponent<PlayerTimeController>().canSlowDownTime = false;
         }
         else
         {

@@ -8,6 +8,7 @@ public class TimeOrbProjectile : MonoBehaviour
     public GameObject destroyFx;
 
     private float speed = 1;
+    private float time = 0.5f;
     private Vector3 destination;
 
     private Color color;
@@ -24,10 +25,13 @@ public class TimeOrbProjectile : MonoBehaviour
 
     void Update()
     {
-        /*
+        if(speed > 4)
+        {
+            //speed = 4;
+        }
+
         transform.LookAt(destination);
-        transform.Translate(destination * speed * Time.deltaTime);
-        */
+        transform.Translate(Vector3.forward * speed * Time.deltaTime);
 
         Vector3.Lerp(transform.position, destination, speed * 10000);
 
@@ -35,7 +39,11 @@ public class TimeOrbProjectile : MonoBehaviour
         {
             GameObject fx = Instantiate(destroyFx, transform.position, transform.rotation);
             fx.GetComponent<ParticleSystem>().startColor = color;
-            fx.GetComponentInChildren<ParticleSystem>().startColor = color;
+
+            for(int i = 0; i < fx.transform.childCount; i++)
+            {
+                fx.transform.GetChild(i).GetComponentInChildren<ParticleSystem>().startColor = color;
+            }
 
             Destroy(fx, 1);
             Destroy(gameObject);
@@ -47,6 +55,8 @@ public class TimeOrbProjectile : MonoBehaviour
         speed = s;
         destination = d;
         color = c;
+
+        speed = Vector3.Distance(transform.position, destination) / time;
 
         Debug.Log("Orb Speed: " + speed);
         Debug.Log("Orb Destination: " + destination);

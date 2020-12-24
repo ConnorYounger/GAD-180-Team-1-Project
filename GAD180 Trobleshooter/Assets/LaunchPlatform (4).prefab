@@ -120,7 +120,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 3
-  MaxDistance: 10
+  MaxDistance: 5
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -210,7 +210,7 @@ GameObject:
   - component: {fileID: 1607545411354113755}
   - component: {fileID: 8177595369399560946}
   - component: {fileID: 2385172953882689833}
-  m_Layer: 18
+  m_Layer: 10
   m_Name: LaunchPlatformCollision
   m_TagString: Untagged
   m_Icon: {fileID: 0}

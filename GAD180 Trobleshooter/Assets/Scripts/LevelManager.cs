@@ -8,6 +8,7 @@ public class LevelManager : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject player;
     public GameObject playerCamWeaponPoint;
+    public GameObject musicController;
 
     public bool isPaused;
     public bool playerIsDead;
@@ -46,6 +47,7 @@ public class LevelManager : MonoBehaviour
             if (player)
             {
                 player.GetComponent<PlayerMovement>().enabled = true;
+                //player.GetComponent<PlayerMovement>().GetComponent<PlayerWeaponController>().ResetAnimator();
                 playerCamWeaponPoint.SetActive(true);
             }
 
@@ -67,6 +69,11 @@ public class LevelManager : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+
+        if (musicController)
+        {
+            musicController.GetComponent<MusicController>().FadeOut();
+        }
 
         playerIsDead = true;
     }

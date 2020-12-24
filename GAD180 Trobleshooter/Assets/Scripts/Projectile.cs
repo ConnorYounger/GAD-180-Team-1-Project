@@ -28,15 +28,22 @@ public class Projectile : MonoBehaviour
 
             if (hit.collider.GetComponent<RobotAI>())
             {
-                if (hit.collider.GetComponent<RobotCollisionBox>().robotParent.GetComponent<RobotAI>())
+                if (hit.collider.GetComponent<RobotCollisionBox>())
                 {
-                    hit.collider.GetComponent<RobotCollisionBox>().robotParent.GetComponent<RobotAI>().TakeDamage(bulletDamage);
+                    if (hit.collider.GetComponent<RobotCollisionBox>().robotParent.GetComponent<RobotAI>())
+                    {
+                        hit.collider.GetComponent<RobotCollisionBox>().robotParent.GetComponent<RobotAI>().TakeDamage(bulletDamage);
+                    }
+                    else if (hit.collider.GetComponent<RobotCollisionBox>().robotParent.GetComponent<UnfinishedRobot>())
+                    {
+                        hit.collider.GetComponent<RobotCollisionBox>().robotParent.GetComponent<UnfinishedRobot>().TakeDamage(bulletDamage);
+                    }
+                    hit.collider.GetComponent<RobotCollisionBox>().BreakOff();
                 }
-                else if (hit.collider.GetComponent<RobotCollisionBox>().robotParent.GetComponent<UnfinishedRobot>())
+                else
                 {
-                    hit.collider.GetComponent<RobotCollisionBox>().robotParent.GetComponent<UnfinishedRobot>().TakeDamage(bulletDamage);
+                    hit.collider.GetComponent<RobotAI>().TakeDamage(bulletDamage);
                 }
-                hit.collider.GetComponent<RobotCollisionBox>().BreakOff();
 
                 Debug.Log("Hit Robot 2");
 

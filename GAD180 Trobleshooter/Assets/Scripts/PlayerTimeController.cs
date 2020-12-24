@@ -20,6 +20,7 @@ public class PlayerTimeController : MonoBehaviour
     public PostProcessProfile timeSlowppfx;
 
     public bool timeIsSlow = false;
+    public bool canSlowDownTime = true;
 
     void Start()
     {
@@ -34,7 +35,7 @@ public class PlayerTimeController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F) && canSlowDownTime)
         {
             SlowDownTime();
         }

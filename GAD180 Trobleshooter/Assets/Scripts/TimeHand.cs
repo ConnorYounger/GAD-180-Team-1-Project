@@ -9,9 +9,11 @@ public class TimeHand : MonoBehaviour
     public int numberOfOrbs = 2;
     public int numberOfMeleeHits = 1;
     public int meleeDamage = 1;
+    private int rayLayerMask = 1 << 10;
+    private int otherRayLayerMask = 1 << 13;
 
     public float timeMultiplier = 2;
-    public float maxOrbRange = 100;
+    public float maxOrbRange = 50;
     public float meleeAttackTime = 1;
 
     public GameObject handOrb;
@@ -100,7 +102,7 @@ public class TimeHand : MonoBehaviour
     {
         if (selectedOrb == 0 || selectedOrb == 1) 
         {
-            Physics.SphereCast(playerCam.transform.position, 1, playerCam.transform.forward, out hit, maxOrbRange, ~11);
+            Physics.SphereCast(playerCam.transform.position, 1, playerCam.transform.forward, out hit, maxOrbRange, rayLayerMask | otherRayLayerMask);
             Debug.DrawLine(playerCam.transform.position, hit.point, Color.green);
 
             if (hit.collider != null)
@@ -254,6 +256,8 @@ public class TimeHand : MonoBehaviour
             {
                 hit.collider.GetComponent<RobotAI>().TimeOrbHit(selectedOrb, timeMultiplier, gameObject);
             }
+
+            CreateOrb();
         }
     }
 
@@ -305,13 +309,14 @@ public class TimeHand : MonoBehaviour
         float speed = distance / projectileOrbTime;
 
         GameObject orb = Instantiate(projectileOrb, orbLaunchPoint.position, orbLaunchPoint.rotation);
-        orb.GetComponent<TimeOrbProjectile>().SetStats(speed, hit.point, orbColors[selectedOrb]);
+        orb.GetComponent<TimeOrbProjectile>().SetStats(speed, hit.collider.gameObject.transform.position, orbColors[selectedOrb]);
 
         if(selectedOrb == 0)
         {
             if(audioSource && speedUpTimeSound)
             {
                 audioSource.clip = speedUpTimeSound;
+                audioSource.pitch = 3f;
 
                 audioSource.Play();
             }

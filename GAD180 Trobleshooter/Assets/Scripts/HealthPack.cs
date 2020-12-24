@@ -7,19 +7,25 @@ public class HealthPack : MonoBehaviour
     public int healthAmount = 4;
 
     private Animator animator;
+    private AudioSource audioSource;
 
     private void Start()
     {
         animator = gameObject.GetComponent<Animator>();
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.collider.GetComponent<PlayerHealth>())
+        if (other.GetComponent<PlayerHealth>() && other.GetComponent<PlayerHealth>().health < other.GetComponent<PlayerHealth>().startingHealth)
         {
-            collision.collider.GetComponent<PlayerHealth>().AddHealth(healthAmount);
+            other.GetComponent<PlayerHealth>().AddHealth(healthAmount);
 
             animator.Play("HealRobotHeal");
+
+            if (audioSource = gameObject.GetComponent<AudioSource>())
+            {
+                audioSource.Play();
+            }
 
             gameObject.GetComponent<BoxCollider>().enabled = false;
         }

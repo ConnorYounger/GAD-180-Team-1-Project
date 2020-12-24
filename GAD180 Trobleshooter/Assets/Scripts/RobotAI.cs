@@ -13,6 +13,8 @@ public class RobotAI : MonoBehaviour
     private int health = 1;
     public int assultRifleBurstNumber = 4;
     public int currentAssultRifleBurstNumber;
+    public int numberOfRevives = 3;
+    private int currentNumberOfRevives;
     private int weaponType = 0;
     private int targetLocationIndex = 0;
 
@@ -51,13 +53,13 @@ public class RobotAI : MonoBehaviour
     public GameObject visionRaycaster;
     public GameObject revivedRobot;
     public GameObject destroyFx;
+    public GameObject takeDamageFx;
     public GameObject arm2Collision;
-    //public GameObject[] meleeHitBoxes;
+    public GameObject meleeHitBox;
     private GameObject weaponProjectile;
     private GameObject player;
     private GameObject repairTarget;
     private GameObject timeHands;
-    private GameObject dalekRobotModel;
     public List<GameObject> robots;
     private List<GameObject> possibleRobots;
 
@@ -78,11 +80,14 @@ public class RobotAI : MonoBehaviour
     public ParticleSystem reviveRobotFx;
 
     public AudioClip deathSound;
+    public AudioClip takeDamageSound;
     public AudioClip alertSound;
     public AudioClip walkingSound;
     public AudioClip[] otherDeathSounds;
 
     private AudioSource audioSource;
+
+    public MeshRenderer[] dalekMeshes;
 
     void Start()
     {
@@ -109,15 +114,12 @@ public class RobotAI : MonoBehaviour
             //SearchForRobots();
         }
 
-        if (transform.FindChild("DalekRobotModel"))
-        {
-            dalekRobotModel = transform.FindChild("DalekRobotModel").gameObject;
-        }
-
         if (gameObject.GetComponent<AudioSource>())
         {
             audioSource = gameObject.GetComponent<AudioSource>();
         }
+
+        currentNumberOfRevives = numberOfRevives;
 
         //defultMaterial = gameObject.GetComponent<SkinnedMeshRenderer>().material;
     }
@@ -591,11 +593,30 @@ public class RobotAI : MonoBehaviour
         {
             Die();
         }
+        else if (audioSource && takeDamageSound)
+        {
+            audioSource.clip = takeDamageSound;
+
+            audioSource.loop = false;
+
+            audioSource.Play();
+
+            if (takeDamageFx)
+            {
+                GameObject fx = Instantiate(takeDamageFx, new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z), transform.rotation);
+                Destroy(fx, 1);
+            }
+        }
     }
 
     public void Die()
     {
         isAlive = false;
+
+        if (meleeHitBox)
+        {
+            meleeHitBox.SetActive(false);
+        }
 
         Ragdoll();
 
@@ -608,6 +629,12 @@ public class RobotAI : MonoBehaviour
 
                 if (arm2Collision.GetComponent<BoxCollider>())
                 {
+                    if (!weapon.GetComponent<Weapon>().projectile)
+                    {
+                        arm2Collision.GetComponent<BoxCollider>().center = new Vector3(0.02f, 0.06f, 0);
+                        arm2Collision.GetComponent<BoxCollider>().size = new Vector3(0.07f, 0.03f, 0.01f);
+                    }
+
                     arm2Collision.GetComponent<BoxCollider>().enabled = true;
                 }
             }
@@ -622,7 +649,10 @@ public class RobotAI : MonoBehaviour
 
         if(enemyType == 2)
         {
-            dalekRobotModel.AddComponent<Rigidbody>();
+            dalekMeshes[0].gameObject.SetActive(false);
+            dalekMeshes[1].gameObject.SetActive(true);
+
+            dalekMeshes[1].gameObject.AddComponent<Rigidbody>();
         }
 
         if (destroyFx)
@@ -706,15 +736,17 @@ public class RobotAI : MonoBehaviour
 
     void CheckForDeadRobots()
     {
-        foreach (GameObject robot in robots)
-        {
-            if (robot.GetComponent<RobotAI>() && !robot.GetComponent<RobotAI>().isAlive && robot.GetComponent<RobotAI>().enemyType == 1 && robot.GetComponent<RobotAI>().startingHealth == 1)
+        if (currentNumberOfRevives > 0) {
+            foreach (GameObject robot in robots)
             {
-                repairTarget = robot;
+                if (robot.GetComponent<RobotAI>() && !robot.GetComponent<RobotAI>().isAlive && robot.GetComponent<RobotAI>().enemyType == 1 && robot.GetComponent<RobotAI>().startingHealth == 1)
+                {
+                    repairTarget = robot;
 
-                behaviour = 2;
+                    behaviour = 2;
 
-                return;
+                    return;
+                }
             }
         }
     }
@@ -747,6 +779,8 @@ public class RobotAI : MonoBehaviour
 
             behaviour = 1;
 
+            currentNumberOfRevives--;
+
             hasStartedRepairing = false;
         }
 
@@ -773,8 +807,6 @@ public class RobotAI : MonoBehaviour
                 speedUpParticles.Play();
                 slowDownParticles.Stop();
             }
-
-            //gameObject.GetComponent<SkinnedMeshRenderer>().material = speedUpMaterial;
         }
         else if(type == 1)
         {
@@ -787,9 +819,7 @@ public class RobotAI : MonoBehaviour
             {
                 slowDownParticles.Play();
                 speedUpParticles.Stop();
-            }
-            
-            //gameObject.GetComponent<SkinnedMeshRenderer>().material = slowDownMaterial;
+            }            
         }
 
         timeHands = hands;
@@ -809,8 +839,6 @@ public class RobotAI : MonoBehaviour
         {
             speedUpParticles.Stop();
             slowDownParticles.Stop();
-        }
-            
-        //gameObject.GetComponent<SkinnedMeshRenderer>().material = defultMaterial;
+        }            
     }
 }
